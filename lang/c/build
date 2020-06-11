@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# https://surma.dev/things/c-to-webassembly/
+
+dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+clang \
+  --target=wasm32 \
+  -O3 \
+  -flto \
+  -nostdlib \
+  -Wl,--no-entry \
+  -Wl,--export-all \
+  -Wl,--lto-O3 \
+  -o "$dir/add.wasm" \
+  "$dir/add.c"
